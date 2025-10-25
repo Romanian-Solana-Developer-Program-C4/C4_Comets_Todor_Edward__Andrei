@@ -1,0 +1,148 @@
+{
+  "address": "njCkgAPdDfewLAZmWZE1ckRDGAiPTwvWMouGGNCJkiR",
+  "metadata": {
+    "name": "namegen",
+    "version": "0.1.0",
+    "spec": "0.1.0"
+  },
+  "instructions": [
+    {
+      "name": "init_user",
+      "discriminator": [
+        14,
+        51,
+        68,
+        159,
+        237,
+        78,
+        158,
+        102
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "user_data",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "set_name",
+      "discriminator": [
+        78,
+        194,
+        111,
+        229,
+        198,
+        169,
+        162,
+        106
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "user_data",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "UserData",
+      "discriminator": [
+        139,
+        248,
+        167,
+        203,
+        253,
+        220,
+        210,
+        221
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "NameTooLong",
+      "msg": "Name too long"
+    },
+    {
+      "code": 6001,
+      "name": "NotOwner",
+      "msg": "Only owner can change the name"
+    }
+  ],
+  "types": [
+    {
+      "name": "UserData",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  ]
+}
