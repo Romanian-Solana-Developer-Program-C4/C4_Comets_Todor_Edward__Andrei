@@ -1,12 +1,11 @@
 // src/anchorClient.ts
 import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
 import { AnchorProvider, Program, Idl } from "@coral-xyz/anchor";
-import idl from "./idl/namegen.json"; // <-- pune calea corectă la IDL
+import idl from "./idl/namegen.json"; 
 
 export const PROGRAM_ID = new PublicKey(
-  // dacă în IDL ai metadata.address, îl poți lua de acolo.
-  // new PublicKey((idl as any).metadata.address)
-  "njCkgAPdDfewLAZmWZE1ckRDGAiPTwvWMouGGNCJkiR" // sau hardcode: pune același Program ID ca în Rust
+ 
+  "njCkgAPdDfewLAZmWZE1ckRDGAiPTwvWMouGGNCJkiR" 
 );
 
 export function getConnection() {
@@ -17,7 +16,7 @@ export function getProvider() {
   const anyWin = window as any;
   const wallet = anyWin?.solana;
   if (!wallet || !wallet.isPhantom) {
-    throw new Error("Phantom nu este detectat în browser.");
+    throw new Error("Phantom isnt detected in the browser.");
   }
   const connection = getConnection();
   return new AnchorProvider(connection, wallet, { commitment: "processed" });
@@ -37,7 +36,7 @@ export async function getPda(authority: PublicKey) {
   return pda;
 }
 
-// conversie: string -> [u8;64]  (trim + zero-pad)
+// convert: string -> [u8;64]  (trim + zero-pad)
 export function toFixedU8_64(input: string): number[] {
   const size = 64;
   const out = new Uint8Array(size);
@@ -46,7 +45,7 @@ export function toFixedU8_64(input: string): number[] {
   return Array.from(out); // Anchor acceptă array number[] pentru [u8;64]
 }
 
-// invers: [u8;64] -> string (fără \0)
+// invers: [u8;64] -> string 
 export function u8ToStringTrim(buf: number[] | Uint8Array): string {
   const b = Buffer.from(buf);
   return b.toString("utf8").replace(/\0+$/, "");
