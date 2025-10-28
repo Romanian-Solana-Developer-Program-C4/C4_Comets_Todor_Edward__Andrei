@@ -9,7 +9,7 @@ import {
 import { BorshCoder, Idl } from "@coral-xyz/anchor";
 import idl from "../src/idl/namegen.json";
 import {
-  getProvider,           // <<< folosim provider direct
+  getProvider,           
   getPda,
   toFixedU8_64,
   u8ToStringTrim,
@@ -59,14 +59,14 @@ export default function Page() {
     [pubkey]
   );
 
-  // folosim DOAR provider (fără Program)
+  // Provider
   const ensure = useCallback(() => {
     const provider = getProvider();
     if (!provider.wallet?.publicKey) throw new Error("Wallet neconectat.");
     return { provider };
   }, []);
 
-  // ——— helpers pt. instrucțiuni raw din IDL ———
+  
   const ixDisc = useCallback((name: string): Uint8Array => {
     const ins = (idl as any)?.instructions?.find((i: any) => i.name === name);
     if (!ins?.discriminator) throw new Error(`Missing discriminator for ${name}`);
