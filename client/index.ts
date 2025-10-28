@@ -2,8 +2,7 @@ import * as anchor from "@coral-xyz/anchor";
 import { Connection, clusterApiUrl, PublicKey, Keypair } from "@solana/web3.js";
 import idl from "./idl/namegen.json";
 
-const PROGRAM_ID = new PublicKey("njCkgAPdDfewLAZmWZE1ckRDGAiPTwvWMouGGNCJkiR"); // pune ID-ul tău
-
+const PROGRAM_ID = new PublicKey("njCkgAPdDfewLAZmWZE1ckRDGAiPTwvWMouGGNCJkiR"); 
 async function pdaForUser(authority: PublicKey) {
   const [pda] = PublicKey.findProgramAddressSync(
     [Buffer.from("user"), authority.toBuffer()],
