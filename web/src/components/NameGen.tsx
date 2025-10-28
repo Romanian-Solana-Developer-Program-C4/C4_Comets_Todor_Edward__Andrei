@@ -8,7 +8,7 @@ import rawIdl from "../idl/namegen.json";
 const PROGRAM_ID = new PublicKey(process.env.NEXT_PUBLIC_PROGRAM_ID!);
 const CLUSTER = process.env.NEXT_PUBLIC_CLUSTER || "devnet";
 
-// normalizează IDL-ul ca să fie compatibil cu anchor-js 0.32.x
+
 function patchIdlForUserData(raw: any) {
   const idl = JSON.parse(JSON.stringify(raw));
 
@@ -16,7 +16,7 @@ function patchIdlForUserData(raw: any) {
     if (!node || node.kind !== "struct" || !Array.isArray(node.fields)) return;
     node.fields = node.fields.map((f: any) => {
       if (f?.name === "name") {
-        // dacă e string/altceva, forțăm arrayul ["u8", 64]
+        
         if (
           !f.type ||
           (typeof f.type === "string" && f.type.toLowerCase() === "string") ||
@@ -56,7 +56,7 @@ export default function NameGen() {
     []
   );
 
-  // conectare Phantom
+  // connect Phantom
   const connectWallet = async () => {
     if (!("solana" in window)) {
       alert("Phantom Wallet nu este instalat!");
@@ -67,7 +67,7 @@ export default function NameGen() {
     setWalletPk(new PublicKey(resp.publicKey.toString()));
   };
 
-  // init provider + program (cu idl patch-uit)
+  // init provider + program 
   useEffect(() => {
     if (!walletPk || !connection) return;
 
@@ -86,10 +86,10 @@ export default function NameGen() {
       const idl = patchIdlForUserData(rawIdl);
       const prog = new anchor.Program(idl, PROGRAM_ID, prov);
       setProgram(prog);
-      setStatus("✅ Program creat cu succes.");
+      setStatus(" Program created with succes.");
     } catch (e) {
       console.error(e);
-      setStatus("❌ Eroare la crearea Program-ului: " + (e as Error).message);
+      setStatus(" Error at creating the program: " + (e as Error).message);
     }
   }, [walletPk, connection]);
 
@@ -122,9 +122,9 @@ export default function NameGen() {
           systemProgram: anchor.web3.SystemProgram.programId,
         })
         .rpc();
-      setStatus("✅ User PDA creat.");
+      setStatus(" User PDA created.");
     } catch (e) {
-      setStatus("❌ Eroare init_user: " + (e as Error).message);
+      setStatus(" Eroare init_user: " + (e as Error).message);
     }
   };
 
@@ -139,9 +139,9 @@ export default function NameGen() {
           userData: pdaForUser,
         })
         .rpc();
-      setStatus(`✅ Nume salvat: ${generatedName}`);
+      setStatus(` Name Saved: ${generatedName}`);
     } catch (e) {
-      setStatus("❌ Eroare set_name: " + (e as Error).message);
+      setStatus(" Error set_name: " + (e as Error).message);
     }
   };
 
