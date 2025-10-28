@@ -14,7 +14,7 @@ function usePhantom() {
       return;
     }
     try {
-      const resp = await provider.connect(); // user gesture => deschide Phantom
+      const resp = await provider.connect(); // user gesture => open Phantom
       setPubkey(resp.publicKey ?? null);
     } catch (e) {
       console.error("Phantom connect error:", e);
@@ -68,7 +68,7 @@ export default function App() {
         })
         .rpc();
 
-      setStatus("PDA inițializat.");
+      setStatus("PDA initiated.");
     } catch (e: any) {
       console.error(e);
       setStatus(`Init error: ${e?.message ?? e}`);
@@ -84,7 +84,7 @@ export default function App() {
   const handleSave = useCallback(async () => {
     try {
       if (!generated) {
-        setStatus("Nu ai un nume generat. Apasă Generate.");
+        setStatus("You didnt generate a name. Press Generate.");
         return;
       }
       setStatus("Saving name on-chain…");
