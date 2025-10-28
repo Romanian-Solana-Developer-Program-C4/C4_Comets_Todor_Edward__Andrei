@@ -39,7 +39,7 @@ async function main() {
   const authority = provider.wallet.publicKey;
   const userPda = await pdaForUser(authority);
 
-  // 1) init_user (o singură dată per autoritate)
+  // 1) init_user
   try {
     await program.methods
       .initUser()
@@ -57,7 +57,7 @@ async function main() {
   // 2) set_name
   const newName = "shadow-edward";
   await program.methods
-    .setName(newName) // ajustează numele metodei exact ca în programul tău
+    .setName(newName) 
     .accounts({
       userData: userPda,
       authority,
