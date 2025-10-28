@@ -10,7 +10,7 @@ function usePhantom() {
     const provider = anyWin?.solana;
 
     if (!provider || !provider.isPhantom) {
-      alert("Phantom nu este instalat. Instalează extensia și reîncarcă pagina.");
+      alert("Phantom is not installed.");
       return;
     }
 
@@ -166,7 +166,7 @@ export default function App() {
   );
 }
 
-// stil rapid ca să nu mai fie pagina „neagră și ilizibilă”
+
 const styles: Record<string, React.CSSProperties> = {
   page: {
     minHeight: "100vh",
