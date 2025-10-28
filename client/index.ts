@@ -12,7 +12,7 @@ async function pdaForUser(authority: PublicKey) {
 }
 
 async function main() {
-  // provider din keypair-ul CLI (id.json)
+  // provider keypair-ul CLI (id.json)
   const wallet = new anchor.Wallet(
     Keypair.fromSecretKey(
       Uint8Array.from(
