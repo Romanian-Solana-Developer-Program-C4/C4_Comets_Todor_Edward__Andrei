@@ -11,12 +11,12 @@ import idl from "./idl/namegen.json";
 
 export const SystemProgram = Web3SystemProgram;
 
-// Conexiune Devnet (confirmed)
+//  Devnet (confirmed)
 export function getConnection() {
   return new Connection(clusterApiUrl("devnet"), "confirmed");
 }
 
-// Provider bazat pe Phantom
+// Provider for Phantom
 export function getProvider() {
   const anyWin = window as any;
   const wallet = anyWin?.solana;
@@ -24,7 +24,7 @@ export function getProvider() {
     throw new Error("Phantom nu este detectat.");
   }
   const connection = getConnection();
-  // Cast simplu la anchor.Wallet pentru TS
+  // Cast for anchor.Wallet for TS
   return new anchor.AnchorProvider(
     connection,
     wallet as unknown as anchor.Wallet,
@@ -32,12 +32,12 @@ export function getProvider() {
   );
 }
 
-// Program Anchor – folosim cast pe constructor ca să evităm bugul de tipare
+// Program Anchor
 export function getProgram(): { program: Program; provider: anchor.AnchorProvider } {
   const provider = getProvider();
   const programId = new PublicKey("njCkgAPdDfewLAZmWZE1ckRDGAiPTwvWMouGGNCJkiR");
 
-  // 👇 Cast “any” pe constructorul Program ca să nu mai confunde Address cu Provider
+  
   const program = new (anchor as any).Program(idl as Idl, programId, provider) as Program;
 
   return { program, provider };
@@ -61,7 +61,7 @@ export function toFixedU8_64(input: string): number[] {
   return Array.from(out);
 }
 
-// [u8;64] -> string (taie 0-urile finale)
+// [u8;64] -> string 
 export function u8ToStringTrim(buf: number[] | Uint8Array): string {
   const u8 = buf instanceof Uint8Array ? buf : Uint8Array.from(buf);
   let end = u8.length;
